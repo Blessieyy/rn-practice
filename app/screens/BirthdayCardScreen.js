@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Image, StyleSheet, TextInput, View, Text, TouchableOpacity } from 'react-native';
-import { launchImageLibrary } from 'react-native-image-picker'; // Ensure you install this library
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
 
@@ -8,21 +7,10 @@ export default function BirthdayCardScreen() {
   const [cardText, setCardText] = useState('Happy Birthday!');
   const [imageUri, setImageUri] = useState(null);
 
-  // Function to pick an image using Image Picker
-  const pickImage = async () => {
-    try {
-      const result = await launchImageLibrary({ mediaType: 'photo' });
-      if (result.assets && result.assets[0]) {
-        // setImageUri(result.assets[0].uri);
-      }
-    } catch (error) {
-      console.error('Error picking image:', error);
-    }
-  };
-
-  // Function to reset the image
-  const resetImage = () => {
-    setImageUri(null);
+  // Function to pick an image (using a hypothetical image picker or placeholder)
+  const pickImage = () => {
+    // Use an image picker library here or set a static image for demo
+    setImageUri('https://example.com/some-image.jpg');
   };
 
   return (
@@ -43,30 +31,14 @@ export default function BirthdayCardScreen() {
         onChangeText={setCardText}
         multiline
         placeholder="Write a message..."
-        accessibilityLabel="Edit card message"
       />
 
       {/* Buttons to pick an image or reset card */}
       <View style={styles.buttonsContainer}>
-        <TouchableOpacity
-          onPress={pickImage}
-          style={styles.button}
-          accessibilityLabel="Pick an image for the birthday card"
-        >
+        <TouchableOpacity onPress={pickImage} style={styles.button}>
           <ThemedText type="defaultSemiBold">Pick an Image</ThemedText>
         </TouchableOpacity>
-        <TouchableOpacity
-          onPress={resetImage}
-          style={styles.button}
-          accessibilityLabel="Remove the selected image"
-        >
-          <ThemedText type="defaultSemiBold">Remove Image</ThemedText>
-        </TouchableOpacity>
-        <TouchableOpacity
-          onPress={() => setCardText('')}
-          style={styles.button}
-          accessibilityLabel="Clear the card text"
-        >
+        <TouchableOpacity onPress={() => setCardText('')} style={styles.button}>
           <ThemedText type="defaultSemiBold">Clear Text</ThemedText>
         </TouchableOpacity>
       </View>
